@@ -16,4 +16,8 @@ public class WeightTracker {
 
         sc.close();
     }
+
+    public void diffweight() {
+        System.out.println(weight.size()-1 - weight.size() -2);
+    }
 }
