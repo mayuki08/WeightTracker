@@ -1,8 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
+
 public class WeightTracker {
     private static final String FILE_NAME = "weight_data.txt"; // 体重を保存するファイル
+    private static final String USER_INFOMATION = "userinfomation.txt";
+    String userName;
+    int firstweight;
+    int height;
+    int goalsetting;
 
     public void trackWeight() {
         Scanner scanner = new Scanner(System.in);
@@ -11,6 +17,13 @@ public class WeightTracker {
         // 現在の体重を入力
         System.out.print("現在の体重を入力してください: ");
         double currentWeight = scanner.nextDouble();
+
+        //初回のみ入力
+        firstRecode();
+        firstRecode();//二回目以降実行されない
+
+        //BMIを計算
+
         
         // 体重差を計算
         if (previousWeight != -1) { // 初回実行でない場合
@@ -25,6 +38,36 @@ public class WeightTracker {
         System.out.println("体重を保存しました。");
 
         scanner.close();
+    }
+
+    //初回入力
+    public void firstRecode() {
+        boolean firsttime = true;
+        if(firsttime) {
+            Scanner sc = new Scanner(System.in);
+
+            //名前の入力
+            System.out.println("名前を入力してください。");
+            userName = sc.nextLine();
+
+            //現在の体重の入力
+            System.out.pritln("体重を入力してください。");
+            firstweight = sc.nextInt();
+
+            //目標体重を入力
+            System.out.println("目標体重を入力してください。");
+            goalsetting = sc.nextInt();
+
+            //身長の入力
+            System.out.println("身長を入力してください。");
+            height = sc.nextInt();
+
+            saveUserInfomation(userName, firstweight, goalsetting, height);
+
+            firsttime = false;//二回目以降実行されないように
+
+        }
+
     }
 
     // ファイルから前回の体重を読み込む
@@ -43,5 +86,8 @@ public class WeightTracker {
         } catch (IOException e) {
             System.out.println("ファイルに書き込めませんでした。");
         }
+    }
+     private void saveUserInfomation(){
+        
     }
 }
